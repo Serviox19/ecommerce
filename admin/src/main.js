@@ -16,6 +16,7 @@ Vue.use(DashboardPlugin);
 
 // configure router
 const router = new VueRouter({
+  mode: "history",
   routes, // short for routes: routes
   scrollBehavior: to => {
     if (to.hash) {
@@ -23,8 +24,7 @@ const router = new VueRouter({
     } else {
       return { x: 0, y: 0 };
     }
-  },
-  linkExactActiveClass: "nav-item active"
+  }
 });
 
 // global library setup
