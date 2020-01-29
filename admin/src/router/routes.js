@@ -230,8 +230,7 @@ let authPages = {
 let productsPages = {
   path: "/products",
   component: DashboardLayout,
-  redirect: "/products",
-  name: "Products",
+  redirect: "/",
   children: [
     {
       path: "/",
@@ -239,7 +238,7 @@ let productsPages = {
       components: { default: Products }
     },
     {
-      path: "/products/:id",
+      path: ":product_id",
       name: "Product Details",
       components: { default: ProductDetails }
     }

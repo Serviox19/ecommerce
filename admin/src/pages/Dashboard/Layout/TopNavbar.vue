@@ -33,7 +33,7 @@
               <label v-else>Search...</label>
             </md-autocomplete>
           </div>
-          <md-list>
+          <!-- <md-list>
             <md-list-item href="#/">
               <i class="material-icons">dashboard</i>
               <p class="hidden-lg hidden-md">Dashboard</p>
@@ -41,7 +41,7 @@
 
             <li class="md-list-item">
               <a
-                href="#/components/notifications"
+                href=""
                 class="md-list-item-router md-list-item-container md-button-clean dropdown"
               >
                 <div class="md-list-item-content">
@@ -67,11 +67,11 @@
               </a>
             </li>
 
-            <md-list-item href="#/pages/user">
+            <md-list-item href="">
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
-          </md-list>
+          </md-list> -->
         </div>
       </div>
     </div>

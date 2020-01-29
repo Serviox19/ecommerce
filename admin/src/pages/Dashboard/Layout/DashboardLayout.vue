@@ -12,7 +12,6 @@
       :background-image="sidebarBackgroundImage"
       :data-background-color="sidebarBackgroundColor"
     >
-      <user-menu></user-menu>
       <mobile-menu></mobile-menu>
       <template slot="links">
         <sidebar-item
@@ -142,7 +141,6 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import MobileMenu from "./Extra/MobileMenu.vue";
 import FixedPlugin from "../../FixedPlugin.vue";
-import UserMenu from "./Extra/UserMenu.vue";
 import { ZoomCenterTransition } from "vue2-transitions";
 
 export default {
@@ -151,7 +149,6 @@ export default {
     ContentFooter,
     MobileMenu,
     FixedPlugin,
-    UserMenu,
     ZoomCenterTransition
   },
   data() {

@@ -1,5 +1,53 @@
 <template>
   <div class="md-layout">
+    <div class="md-layout-item md-small-size-100">
+      <md-card>
+        <md-card-header class="md-card-header-icon md-card-header-green">
+          <div class="card-icon">
+            <md-icon>today</md-icon>
+          </div>
+          <h4 class="title">Datepicker - <small>labeled</small></h4>
+        </md-card-header>
+
+        <md-card-content>
+          <md-datepicker>
+            <label>Select date</label>
+          </md-datepicker>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div class="md-layout-item md-small-size-100">
+      <md-card>
+        <md-card-header class="md-card-header-icon md-card-header-green">
+          <div class="card-icon">
+            <md-icon>today</md-icon>
+          </div>
+          <h4 class="title">Datepicker - <small>labeled</small></h4>
+        </md-card-header>
+
+        <md-card-content>
+          <md-datepicker>
+            <label>Select date</label>
+          </md-datepicker>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div class="md-layout-item md-small-size-100">
+      <md-card>
+        <md-card-header class="md-card-header-icon md-card-header-green">
+          <div class="card-icon">
+            <md-icon>today</md-icon>
+          </div>
+          <h4 class="title">Datepicker - <small>labeled</small></h4>
+        </md-card-header>
+
+        <md-card-content>
+          <md-datepicker>
+            <label>Select date</label>
+          </md-datepicker>
+        </md-card-content>
+      </md-card>
+    </div>
     <div class="md-layout-item">
       <md-card>
         <md-card-header class="md-card-header-icon md-card-header-green">
@@ -173,6 +221,18 @@ export default {
     };
   },
   methods: {
+    getProducts() {
+      // let vm = this;
+      db.collection('products')
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          let docData = doc.data();
+          docData.id = doc.id;
+          this.tableData.push(docData)
+        })
+      })
+    },
     customSort(value) {
       return value.sort((a, b) => {
         const sortBy = this.currentSort;
@@ -235,6 +295,9 @@ export default {
       }
     }
   },
+  created() {
+    this.getProducts()
+  },
   mounted() {
     // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableData, {
@@ -243,11 +306,8 @@ export default {
     });
   },
   watch: {
-    /**
-     * Searches through the table data by a given query.
-     * NOTE: If you have a lot of data, it's recommended to do the search on the Server Side and only display the results here.
-     * @param value of the query
-     */
+    /*
+     * Searches through the table data by a given query. */
     searchQuery(value) {
       let result = this.tableData;
       if (value !== "") {
