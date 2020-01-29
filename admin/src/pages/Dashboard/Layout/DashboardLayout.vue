@@ -20,7 +20,7 @@
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Products', icon: 'dashboard', path: '/products' }"
+          :link="{ name: 'Products', icon: 'shopping_basket', path: '/products' }"
         >
         </sidebar-item>
         <sidebar-item :link="{ name: 'Pages', icon: 'image' }">

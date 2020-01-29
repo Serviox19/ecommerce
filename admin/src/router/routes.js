@@ -44,7 +44,8 @@ import Calendar from "@/pages/Dashboard/Calendar.vue";
 import Charts from "@/pages/Dashboard/Charts.vue";
 import Widgets from "@/pages/Dashboard/Widgets.vue";
 
-import Products from "@/pages/Dashboard/Products.vue"
+import Products from "@/pages/Dashboard/Products.vue";
+import ProductDetails from "@/pages/Dashboard/ProductDetails.vue"
 
 let componentsMenu = {
   path: "/components",
@@ -237,11 +238,11 @@ let productsPages = {
       name: "Products",
       components: { default: Products }
     },
-    // {
-    //   path: "/products/:id",
-    //   name: "Product Details",
-    //   components: { default: ProductsDetails }
-    // }
+    {
+      path: "/products/:id",
+      name: "Product Details",
+      components: { default: ProductDetails }
+    }
   ]
 }
 

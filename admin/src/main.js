@@ -6,26 +6,19 @@ import DashboardPlugin from "./material-dashboard";
 // Plugins
 import App from "./App.vue";
 import Chartist from "chartist";
+import firebase from "firebase";
+import { firestorePlugin } from "vuefire";
 
 // router setup
-import routes from "./routes/routes";
+import router from "@/router";
 
 // plugin setup
 Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
+Vue.use(firestorePlugin);
+Vue.config.productionTip = false;
 
-// configure router
-const router = new VueRouter({
-  mode: "history",
-  routes, // short for routes: routes
-  scrollBehavior: to => {
-    if (to.hash) {
-      return { selector: to.hash };
-    } else {
-      return { x: 0, y: 0 };
-    }
-  }
-});
+
 
 // global library setup
 Object.defineProperty(Vue.prototype, "$Chartist", {

@@ -30,7 +30,9 @@
                   </md-option>
                 </md-select>
               </md-field>
-
+              <md-field>
+                <md-button @click="addProduct">Add Product</md-button>
+              </md-field>
               <md-field>
                 <md-input
                   type="search"
@@ -118,6 +120,8 @@
 import { Pagination } from "@/components";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
+import { db } from "@/config/firebaseInit";
+import router from "@/router";
 
 export default {
   components: {
@@ -178,20 +182,18 @@ export default {
         return b[sortBy].localeCompare(a[sortBy]);
       });
     },
-    handleLike(item) {
-      Swal.fire({
-        title: `You liked ${item.name}`,
-        buttonsStyling: false,
-        type: "success",
-        confirmButtonClass: "md-button md-success"
-      });
+    addProduct() {
+      let ref = db.collection("products").doc();
+      this.handleEdit(ref);
     },
     handleEdit(item) {
-      Swal.fire({
-        title: `You want to edit ${item.name}`,
-        buttonsStyling: false,
-        confirmButtonClass: "md-button md-info"
-      });
+      let id = item.id;
+      router.push(`/products/${id}`);
+      // Swal.fire({
+      //   title: `You want to edit ${item.name}`,
+      //   buttonsStyling: false,
+      //   confirmButtonClass: "md-button md-info"
+      // });
     },
     handleDelete(item) {
       Swal.fire({
@@ -214,6 +216,14 @@ export default {
             buttonsStyling: false
           });
         }
+      });
+    },
+    handleLike(item) {
+      Swal.fire({
+        title: `You liked ${item.name}`,
+        buttonsStyling: false,
+        type: "success",
+        confirmButtonClass: "md-button md-success"
       });
     },
     deleteRow(item) {
