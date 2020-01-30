@@ -220,6 +220,11 @@ export default {
       fuseSearch: null
     };
   },
+  firestore() {
+    return {
+      tableData: db.collection("products")
+    };
+  },
   methods: {
     getProducts() {
       // let vm = this;
@@ -229,6 +234,7 @@ export default {
         snapshot.docs.forEach((doc) => {
           let docData = doc.data();
           docData.id = doc.id;
+          console.log(docData);
           this.tableData.push(docData)
         })
       })
@@ -267,13 +273,19 @@ export default {
         buttonsStyling: false
       }).then(result => {
         if (result.value) {
-          this.deleteRow(item);
-          Swal.fire({
-            title: "Deleted!",
-            text: `You deleted ${item.name}`,
-            type: "success",
-            confirmButtonClass: "md-button md-success btn-fill",
-            buttonsStyling: false
+          //code to delete
+          return db
+          .collection("products")
+          .doc(item.id)
+          .delete()
+          .then(() => {
+            Swal.fire({
+              title: "Deleted!",
+              text: `You deleted ${item.name}`,
+              type: "success",
+              confirmButtonClass: "md-button md-success btn-fill",
+              buttonsStyling: false
+            });
           });
         }
       });
@@ -296,7 +308,7 @@ export default {
     }
   },
   created() {
-    this.getProducts()
+    // this.getProducts()
   },
   mounted() {
     // Fuse search initialization.

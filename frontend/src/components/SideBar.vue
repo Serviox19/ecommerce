@@ -1,11 +1,11 @@
 <template>
-  <h2>Header</h2>
+  <h2>SideBar</h2>
 </template>
 
 <script>
 
 export default {
-  name: 'header',
+  name: 'sidebar',
   components: {}
 }
 </script>

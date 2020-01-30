@@ -82,6 +82,13 @@ export default {
       responsive: false
     };
   },
+  created() {
+  },
+  firestore() {
+    return {
+      product: db.collection("products").doc(this.$route.params.product_id)
+    };
+  },
   watch: {
     product: {
       handler(val) {
@@ -92,15 +99,10 @@ export default {
       deep: true
     }
   },
-  // firestore() {
-  //   return {
-  //     product: db.collection("products").doc(this.$route.params.product_id)
-  //   };
-  // },
   methods: {
     save() {
       let vm = this;
-      if (!this.product.created){
+      if (!vm.product.created){
         vm.product.created = Date.now();
       }
       console.log(this.product)
