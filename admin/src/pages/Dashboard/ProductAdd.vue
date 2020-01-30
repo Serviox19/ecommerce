@@ -73,11 +73,6 @@ export default {
   },
   created() {
   },
-  firestore() {
-    return {
-      product: db.collection("products").doc(this.$route.params.product_id)
-    };
-  },
   watch: {
     product: {
       handler(val) {

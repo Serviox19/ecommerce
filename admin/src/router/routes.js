@@ -45,6 +45,7 @@ import Charts from "@/pages/Dashboard/Charts.vue";
 import Widgets from "@/pages/Dashboard/Widgets.vue";
 
 import Products from "@/pages/Dashboard/Products.vue";
+import ProductAdd from "@/pages/Dashboard/ProductAdd.vue";
 import ProductDetails from "@/pages/Dashboard/ProductDetails.vue"
 
 let componentsMenu = {
@@ -238,9 +239,14 @@ let productsPages = {
       components: { default: Products }
     },
     {
-      path: ":product_id",
+      path: "/products/:product_id",
       name: "Product Details",
       components: { default: ProductDetails }
+    },
+    {
+      path: "/products/add",
+      name: "Product Add",
+      components: { default: ProductAdd }
     }
   ]
 }

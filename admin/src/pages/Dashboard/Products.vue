@@ -48,7 +48,7 @@
         </md-card-content>
       </md-card>
     </div>
-    <div class="md-layout-item">
+    <div class="md-layout-item md-medium-size-100 md-large-size-100">
       <md-card>
         <md-card-header class="md-card-header-icon md-card-header-green">
           <div class="card-icon">
@@ -250,7 +250,8 @@ export default {
     },
     addProduct() {
       let ref = db.collection("products").doc();
-      this.handleEdit(ref);
+      let id = ref.id;
+      router.push({ name: 'Product Add', params: { product_id: id } })
     },
     handleEdit(item) {
       let id = item.id;

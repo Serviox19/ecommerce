@@ -59,20 +59,18 @@
         <div itemscope="" itemtype="http://schema.org/Organization">
 
           <div id="HeaderLogoWrapper" class="supports-js">
-            <a href="/" itemprop="url" style="padding-top:30.30888030888031%; display: block;">
+            <a href="/" itemprop="url" style="display: block">
               <h1>Ecommerce!</h1>
             </a>
           </div>
           <noscript>
 
             <a href="/" itemprop="url">
-              <img class="site-header__logo" src="//cdn.shopify.com/s/files/1/0037/5472/files/logo_150x.png?v=1480350819"
-                srcset="//cdn.shopify.com/s/files/1/0037/5472/files/logo_150x.png?v=1480350819 1x, //cdn.shopify.com/s/files/1/0037/5472/files/logo_150x@2x.png?v=1480350819 2x" alt="Shopify Shirts" itemprop="logo">
+              <img class="site-header__logo" src="" />
             </a>
           </noscript>
 
           <h1 class="visually-hidden">Shopify Shirts</h1>
-
 
         </div>
       </div>
