@@ -13,13 +13,15 @@
       <div id="SiteNav" class="site-nav" role="menu">
         <ul class="list--nav">
 
-          <li class="site-nav__item site-nav--active">
+          <li class="site-nav__item" :class="activeClass('')">
             <a href="/" class="site-nav__link" aria-current="page">Home</a>
           </li>
 
-          <li class="site-nav__item" v-for="(collection, index) in collections" :key="index">
-            <a :href="`/collections/${collection.slug}`" class="site-nav__link">{{collection.name}}</a>
-          </li>
+          <div v-if="collections">
+            <li class="site-nav__item" v-for="(c, index) in collections" :key="index" :class="activeClass(c.slug)">
+              <a :href="`/collections/${c.slug}`" class="site-nav__link">{{c.name}}</a>
+            </li>
+          </div>
 
         </ul>
         <ul class="list--inline social-links">
@@ -107,21 +109,39 @@ import { db } from '@/config/firebaseInit'
 export default {
   name: 'sidebar',
   components: {},
+  computed: {
+  },
   data() {
     return {
-      collections: []
+      collections: [],
+      collection: null
     }
-  },
-  created() {
-  },
-  mounted() {
   },
   firestore() {
     return {
       collections: db.collection('collections')
     }
   },
+  created() {
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.collection = this.$route.params.collection_id
+    });
+  },
   methods: {
+    activeClass(data) {
+      let activeClass = "site-nav--active";
+
+      if (data === this.collection) {
+        return activeClass
+      } else if (data == '' && this.collection == undefined) {
+        return activeClass
+      } else {
+        return null
+      }
+
+    }
   }
 }
 </script>

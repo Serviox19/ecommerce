@@ -70,9 +70,6 @@
     </header>
   </div>
 
-
-
-
 </div>
 </template>
 
@@ -80,7 +77,21 @@
 
 export default {
   name: 'header',
-  components: {}
+  components: {},
+  data() {
+    return {
+
+    }
+  },
+  created() {
+  },
+  mounted() {
+  },
+  methods: {
+    goToCheckout() {
+      console.log('not yet');
+    }
+  }
 }
 </script>
 
