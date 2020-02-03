@@ -45,6 +45,20 @@
             </div>
           </div>
 
+          <div class="md-layout" v-if="collections">
+            <label class="md-layout-item md-size-15 md-form-label">
+              Collection
+            </label>
+            <div class="md-layout-item">
+              <md-field>
+                <md-select v-model="product.collection">
+                  <md-option value="">None</md-option>
+                  <md-option v-for="(c, index) in this.collections" :key="index" :value="c.slug">{{ c.name }}</md-option>
+                </md-select>
+              </md-field>
+            </div>
+          </div>
+
         </md-card-content>
       </md-card>
     </div>
@@ -68,11 +82,20 @@ export default {
       product: {
         name: "",
         slug: "",
-        price: 0
-      }
+        price: 0,
+        collection: ""
+      },
+      collections: []
     }
   },
   created() {
+  },
+  mounted() {
+  },
+  firestore() {
+    return {
+      collections: db.collection("collections")
+    }
   },
   watch: {
     product: {
