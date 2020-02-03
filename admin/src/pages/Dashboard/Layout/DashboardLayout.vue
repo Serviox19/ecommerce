@@ -19,6 +19,10 @@
         >
         </sidebar-item>
         <sidebar-item
+          :link="{ name: 'Collections', icon: 'view_list', path: '/collections' }"
+        >
+        </sidebar-item>
+        <sidebar-item
           :link="{ name: 'Products', icon: 'shopping_basket', path: '/products' }"
         >
         </sidebar-item>

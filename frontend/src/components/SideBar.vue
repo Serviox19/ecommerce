@@ -17,40 +17,8 @@
             <a href="/" class="site-nav__link" aria-current="page">Home</a>
           </li>
 
-          <li class="site-nav__item">
-            <a href="/collections/accessories" class="site-nav__link">Accessories</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/denim" class="site-nav__link">Denim</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/footwear" class="site-nav__link">Footwear</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/jeans" class="site-nav__link">Jeans</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/outerwear" class="site-nav__link">Outerwear</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/pants" class="site-nav__link">Pants</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/shirts" class="site-nav__link">Shirts</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/t-shirts" class="site-nav__link">T-Shirts</a>
-          </li>
-
-          <li class="site-nav__item">
-            <a href="/collections/shorts" class="site-nav__link">Shorts</a>
+          <li class="site-nav__item" v-for="(collection, index) in collections" :key="index">
+            <a :href="`/collections/${collection.slug}`" class="site-nav__link">{{collection.name}}</a>
           </li>
 
         </ul>
@@ -134,10 +102,27 @@
 </template>
 
 <script>
+import { db } from '@/config/firebaseInit'
 
 export default {
   name: 'sidebar',
-  components: {}
+  components: {},
+  data() {
+    return {
+      collections: []
+    }
+  },
+  created() {
+  },
+  mounted() {
+  },
+  firestore() {
+    return {
+      collections: db.collection('collections')
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

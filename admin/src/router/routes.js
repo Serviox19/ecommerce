@@ -44,9 +44,14 @@ import Calendar from "@/pages/Dashboard/Calendar.vue";
 import Charts from "@/pages/Dashboard/Charts.vue";
 import Widgets from "@/pages/Dashboard/Widgets.vue";
 
+//Products
 import Products from "@/pages/Dashboard/Products.vue";
 import ProductAdd from "@/pages/Dashboard/ProductAdd.vue";
 import ProductDetails from "@/pages/Dashboard/ProductDetails.vue"
+
+//Collections
+import Collections from "@/pages/Dashboard/Collections.vue";
+import CollectionAdd from "@/pages/Dashboard/CollectionAdd.vue";
 
 let componentsMenu = {
   path: "/components",
@@ -251,6 +256,24 @@ let productsPages = {
   ]
 }
 
+let collectionPages = {
+  path: "/collections",
+  component: DashboardLayout,
+  redirect: "/",
+  children: [
+    {
+      path: "/",
+      name: "Collections",
+      components: { default: Collections }
+    },
+    {
+      path: "/collections/add",
+      name: "Collection Add",
+      components: { default: CollectionAdd }
+    }
+  ]
+}
+
 const routes = [
   {
     path: "/",
@@ -264,6 +287,7 @@ const routes = [
   pagesMenu,
   authPages,
   productsPages,
+  collectionPages,
   {
     path: "/",
     component: DashboardLayout,

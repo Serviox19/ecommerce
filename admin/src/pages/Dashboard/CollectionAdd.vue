@@ -7,7 +7,7 @@
       <md-card>
         <md-card-header class="md-card-header-text md-card-header-green">
           <div class="card-text">
-            <h4 class="title">Product Edit</h4>
+            <h4 class="title">Collection Add</h4>
           </div>
         </md-card-header>
 
@@ -18,7 +18,7 @@
             </label>
             <div class="md-layout-item">
               <md-field>
-                <md-input v-model="product.name" type="text"></md-input>
+                <md-input v-model="collection.name" type="text"></md-input>
               </md-field>
             </div>
           </div>
@@ -29,18 +29,27 @@
             </label>
             <div class="md-layout-item">
               <md-field>
-                <md-input v-model="product.slug" type="text"></md-input>
+                <md-input v-model="collection.slug" type="text"></md-input>
               </md-field>
             </div>
           </div>
 
           <div class="md-layout">
             <label class="md-layout-item md-size-15 md-form-label">
-              Price
+              Featured
+            </label>
+            <div class="md-layout-item">
+              <md-checkbox v-model="collection.featured">Featured ?</md-checkbox>
+            </div>
+          </div>
+
+          <div class="md-layout">
+            <label class="md-layout-item md-size-15 md-form-label">
+              Image
             </label>
             <div class="md-layout-item">
               <md-field>
-                <md-input v-model="product.price" placeholder="Price" type="text"></md-input>
+                <md-input v-model="collection.image" placeholder="Image" type="file"></md-input>
               </md-field>
             </div>
           </div>
@@ -65,19 +74,19 @@ export default {
   components: {},
   data() {
     return {
-      product: {
+      collection: {
         name: "",
         slug: "",
-        price: 0
+        featured: false
       }
     }
   },
   created() {
   },
   watch: {
-    product: {
+    collection: {
       handler(val) {
-        this.product.slug = val.name.replace(/[^a-zA-Z0-9]/g, "-");
+        this.collection.slug = val.name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
       },
       deep: true
     }
@@ -85,17 +94,17 @@ export default {
   methods: {
     save() {
       let vm = this;
-      if (!vm.product.created){
-        vm.product.created = Date.now();
+      if (!vm.collection.created){
+        vm.collection.created = Date.now();
       }
-      console.log(this.product)
-      return db.collection("products")
-      .doc(this.$route.params.product_id)
-      .set(vm.product, { merge: true })
+      console.log(this.collection)
+      return db.collection("collections")
+      .doc(this.$route.params.collection_id)
+      .set(vm.collection, { merge: true })
       .then(() => {
         return Swal.fire("Success", "Page Updated", "success").then(result => {
           if (result.value) {
-            router.push('/products');
+            router.push('/collections');
           }
         });
       })

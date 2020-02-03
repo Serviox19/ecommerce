@@ -14,7 +14,7 @@
               </path>
             </svg>
           </a>
-          <form action="/search" method="get" class="search-bar small--hide" role="search">
+          <form class="search-bar small--hide" role="search">
 
             <button type="submit" class="search-bar__submit">
               <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 20 20">
@@ -46,7 +46,7 @@
           </span>
         </a>
         <span class="vertical-divider small--hide"></span>
-        <a href="/cart" class="site-header__cart small--hide">
+        <a @click="goToCheckout" class="site-header__cart small--hide">
           Check Out
         </a>
       </div>
@@ -56,21 +56,13 @@
 
     <header class="site-header grid medium-up--grid--table" role="banner">
       <div class="grid__item small--text-center">
-        <div itemscope="" itemtype="http://schema.org/Organization">
+        <div itemscope="">
 
           <div id="HeaderLogoWrapper" class="supports-js">
             <a href="/" itemprop="url" style="display: block">
               <h1>Ecommerce!</h1>
             </a>
           </div>
-          <noscript>
-
-            <a href="/" itemprop="url">
-              <img class="site-header__logo" src="" />
-            </a>
-          </noscript>
-
-          <h1 class="visually-hidden">Shopify Shirts</h1>
 
         </div>
       </div>

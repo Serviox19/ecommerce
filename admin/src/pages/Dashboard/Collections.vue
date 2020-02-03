@@ -1,53 +1,6 @@
 <template>
   <div class="md-layout">
-    <div class="md-layout-item md-small-size-100">
-      <md-card>
-        <md-card-header class="md-card-header-icon md-card-header-green">
-          <div class="card-icon">
-            <md-icon>today</md-icon>
-          </div>
-          <h4 class="title">Datepicker - <small>labeled</small></h4>
-        </md-card-header>
 
-        <md-card-content>
-          <md-datepicker>
-            <label>Select date</label>
-          </md-datepicker>
-        </md-card-content>
-      </md-card>
-    </div>
-    <div class="md-layout-item md-small-size-100">
-      <md-card>
-        <md-card-header class="md-card-header-icon md-card-header-green">
-          <div class="card-icon">
-            <md-icon>today</md-icon>
-          </div>
-          <h4 class="title">Datepicker - <small>labeled</small></h4>
-        </md-card-header>
-
-        <md-card-content>
-          <md-datepicker>
-            <label>Select date</label>
-          </md-datepicker>
-        </md-card-content>
-      </md-card>
-    </div>
-    <div class="md-layout-item md-small-size-100">
-      <md-card>
-        <md-card-header class="md-card-header-icon md-card-header-green">
-          <div class="card-icon">
-            <md-icon>today</md-icon>
-          </div>
-          <h4 class="title">Datepicker - <small>labeled</small></h4>
-        </md-card-header>
-
-        <md-card-content>
-          <md-datepicker>
-            <label>Select date</label>
-          </md-datepicker>
-        </md-card-content>
-      </md-card>
-    </div>
     <div class="md-layout-item md-medium-size-100 md-large-size-100">
       <md-card>
         <md-card-header class="md-card-header-icon md-card-header-green">
@@ -79,7 +32,7 @@
                 </md-select>
               </md-field>
               <md-field>
-                <md-button @click="addProduct">Add Product</md-button>
+                <md-button @click="addCollection">Add Collection</md-button>
               </md-field>
               <md-field>
                 <md-input
@@ -207,7 +160,7 @@ export default {
       currentSort: "name",
       currentSortOrder: "asc",
       pagination: {
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         perPageOptions: [5, 10, 25, 50],
         total: 0
@@ -222,13 +175,13 @@ export default {
   },
   firestore() {
     return {
-      tableData: db.collection("products")
+      tableData: db.collection("collections")
     };
   },
   methods: {
     getProducts() {
       // let vm = this;
-      db.collection('products')
+      db.collection('collections')
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
@@ -248,14 +201,14 @@ export default {
         return b[sortBy].localeCompare(a[sortBy]);
       });
     },
-    addProduct() {
-      let ref = db.collection("products").doc();
+    addCollection() {
+      let ref = db.collection("collections").doc();
       let id = ref.id;
-      router.push({ name: 'Product Add', params: { product_id: id } })
+      router.push({ name: 'Collection Add', params: { collection_id: id } })
     },
     handleEdit(item) {
       let id = item.id;
-      router.push(`/products/${id}`);
+      router.push(`/collections/${id}`);
       // Swal.fire({
       //   title: `You want to edit ${item.name}`,
       //   buttonsStyling: false,
@@ -276,7 +229,7 @@ export default {
         if (result.value) {
           //code to delete
           return db
-          .collection("products")
+          .collection("collections")
           .doc(item.id)
           .delete()
           .then(() => {
