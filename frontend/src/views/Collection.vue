@@ -39,6 +39,7 @@
         v-for="(product, index) in products"
         :key="index"
         :product="product"
+        :collection="$route.params.collection_id"
       />
     </div>
   </div>

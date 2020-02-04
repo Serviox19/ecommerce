@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue';
-import Collection from '../views/Collection.vue'
+import Collection from '../views/Collection.vue';
+import ProductDetail from '../views/ProductDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/collections/:collection_id',
     name: 'collections',
     component: Collection
+  },
+  {
+    path: '/collections/:collection_id/products/:product_id',
+    name: 'product-detail',
+    component: ProductDetail
   }
 ]
 

@@ -2,7 +2,7 @@
   <div class="product grid__item medium-up--one-third small--one-half slide-up-animation animated" role="listitem">
 
     <div class="supports-js" style="max-width: 600px; margin: 0 auto">
-      <a href="/products/artillery-bomber-jacket-fatigue" class="product__image-wrapper" style="padding-top:100.0%" :title="product.name">
+      <a :href="`/collections/${collection}/products/${product.slug}`" class="product__image-wrapper" style="padding-top:100.0%" :title="product.name">
         <img class="product__image lazyautosizes lazyloaded" src="https://via.placeholder.com/250x300" />
       </a>
     </div>
@@ -14,7 +14,7 @@
   </noscript> -->
 
   <div class="product__title text-center">
-    <a href="/products/artillery-bomber-jacket-fatigue">
+    <a :href="`/collections/${collection}/products/${product.slug}`">
       {{ product.name }}
     </a>
   </div>
@@ -31,7 +31,7 @@
 <script>
 export default {
   name: 'product',
-  props: ['product'],
+  props: ['product', 'collection'],
   components: {},
   data() {
     return {}
