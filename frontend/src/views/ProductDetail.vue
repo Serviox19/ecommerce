@@ -18,14 +18,18 @@
         {{ displayProduct() }}
       </span>
     </nav>
-    <h1>Show Product Here</h1>
+    <ProductInfo />
   </div>
 </template>
 
 <script>
+import ProductInfo from '@/components/ProductInfo';
+
 export default {
   name: 'product-detail',
-  components: {},
+  components: {
+    ProductInfo
+  },
   data() {
     return {}
   },
