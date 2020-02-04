@@ -98,11 +98,8 @@
               <md-table-cell md-label="Name" md-sort-by="name">{{
                 item.name
               }}</md-table-cell>
-              <md-table-cell md-label="Email" md-sort-by="email">{{
-                item.email
-              }}</md-table-cell>
-              <md-table-cell md-label="Age">{{ item.age }}</md-table-cell>
-              <md-table-cell md-label="Salary">{{ item.salary }}</md-table-cell>
+              <md-table-cell md-label="Collection" md-sort-by="collection">{{ capitalize(item.collection) }}</md-table-cell>
+              <md-table-cell md-label="Price">{{ item.price }}</md-table-cell>
               <md-table-cell md-label="Actions">
                 <md-button
                   class="md-just-icon md-info md-simple"
@@ -212,9 +209,9 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Name", "Email", "Age", "Salary", "Actions"],
+      footerTable: ["Name", "Collection", "Price"],
       searchQuery: "",
-      propsToSearch: ["name", "email", "age"],
+      propsToSearch: ["name", "collection", "price"],
       tableData: [],
       searchedData: [],
       fuseSearch: null
@@ -226,19 +223,6 @@ export default {
     };
   },
   methods: {
-    getProducts() {
-      // let vm = this;
-      db.collection('products')
-      .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          let docData = doc.data();
-          docData.id = doc.id;
-          console.log(docData);
-          this.tableData.push(docData)
-        })
-      })
-    },
     customSort(value) {
       return value.sort((a, b) => {
         const sortBy = this.currentSort;
@@ -298,6 +282,13 @@ export default {
         type: "success",
         confirmButtonClass: "md-button md-success"
       });
+    },
+    capitalize(data) {
+      if (data) {
+        return data.charAt(0).toUpperCase() + data.slice(1)
+      } else {
+        return 'None'
+      }
     },
     deleteRow(item) {
       let indexToDelete = this.tableData.findIndex(

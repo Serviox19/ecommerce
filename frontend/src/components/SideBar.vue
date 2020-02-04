@@ -1,7 +1,7 @@
 <template>
 <div id="shopify-section-sidebar" class="shopify-section">
   <div data-section-id="sidebar" data-section-type="sidebar-section">
-    <nav class="grid__item small--text-center medium-up--one-fifth" role="navigation">
+    <nav class="grid__item small--text-center medium-up--one-fifth" role="navigation" style="padding: 0">
       <hr class="hr--small medium-up--hide">
       <button id="ToggleMobileMenu" class="mobile-menu-icon medium-up--hide" aria-haspopup="true" aria-owns="SiteNav">
         <span class="line"></span>

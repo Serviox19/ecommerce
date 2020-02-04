@@ -52,6 +52,7 @@ import ProductDetails from "@/pages/Dashboard/ProductDetails.vue"
 //Collections
 import Collections from "@/pages/Dashboard/Collections.vue";
 import CollectionAdd from "@/pages/Dashboard/CollectionAdd.vue";
+import CollectionDetails from "@/pages/Dashboard/CollectionDetails.vue";
 
 let componentsMenu = {
   path: "/components",
@@ -270,7 +271,12 @@ let collectionPages = {
       path: "/collections/add",
       name: "Collection Add",
       components: { default: CollectionAdd }
-    }
+    },
+    {
+      path: "/collections/:collection_id",
+      name: "Collection Details",
+      components: { default: CollectionDetails }
+    },
   ]
 }
 
