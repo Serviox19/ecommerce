@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: 'product',
+  name: 'product-block',
   props: ['product', 'collection'],
   components: {},
   data() {

@@ -35,7 +35,7 @@
 
     </header>
     <div class="grid grid--uniform" role="list">
-      <Product
+      <ProductBlock
         v-for="(product, index) in products"
         :key="index"
         :product="product"
@@ -46,13 +46,13 @@
 </template>
 
 <script>
-import Product from '@/components/Product';
+import ProductBlock from '@/components/ProductBlock';
 import { db } from '@/config/firebaseInit'
 
 export default {
   name: 'collection',
   components: {
-    Product
+    ProductBlock
   },
   data() {
     return {
