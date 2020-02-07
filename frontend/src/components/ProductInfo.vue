@@ -60,14 +60,14 @@
       <div class="grid__item medium-up--one-half">
         <div class="product-single__meta small--text-center">
           <h1 class="product-single__title" itemprop="name">
-            Spoke Weekender Bag - Black
+            {{product.name}}
           </h1>
           <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
             <meta itemprop="priceCurrency" content="CAD">
             <link itemprop="availability" href="http://schema.org/OutOfStock">
             <p class="product-single__prices">
               <span class="visually-hidden">Regular price</span>
-              <span id="ProductPrice" class="product-single__price" itemprop="price" content="699.95">$699.95</span>
+              <span id="ProductPrice" class="product-single__price" itemprop="price" content="699.95">${{ product.price }}</span>
             </p>
             <form method="post" action="/cart/add" id="product_form_69902958607" accept-charset="UTF-8" class="product-form" enctype="multipart/form-data">
               <input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓">
@@ -108,8 +108,9 @@
 <script>
 export default {
   name: 'product-info',
-  props: [],
+  props: ['product'],
   components: {},
+  computed: {},
   data() {
     return {}
   },
@@ -117,7 +118,8 @@ export default {
   },
   mounted() {
   },
-  methods: {}
+  methods: {
+  }
 }
 </script>
 

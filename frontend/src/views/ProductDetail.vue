@@ -18,11 +18,12 @@
         {{ displayProduct() }}
       </span>
     </nav>
-    <ProductInfo />
+    <ProductInfo :product.sync="product" />
   </div>
 </template>
 
 <script>
+import { db } from '@/config/firebaseInit';
 import ProductInfo from '@/components/ProductInfo';
 
 export default {
@@ -31,9 +32,18 @@ export default {
     ProductInfo
   },
   data() {
-    return {}
+    return {
+      product: {}
+    }
   },
   created() {
+    db.collection('products').where('slug', '==', this.$route.params.product_id)
+    .get()
+    .then((snapshot) => {
+      let productData = snapshot.docs[0].data()
+      productData.id = snapshot.docs[0].id;
+      this.product = productData
+    })
   },
   mounted() {
   },
