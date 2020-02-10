@@ -71,6 +71,32 @@
             </div>
           </div>
 
+          <div class="md-layout">
+            <label class="md-layout-item md-size-15 md-form-label">
+              Main Image
+            </label>
+            <div class="md-layout-item">
+              <md-field>
+                <md-file
+                  type="file"
+                  ref="upload"
+                  accept="image/*"
+                  @change="uploadImage"
+                  :disabled="product.main_image !== '' || null"
+                  v-model="product.main_image"
+                ></md-file>
+              </md-field>
+            </div>
+          </div>
+
+          <div class="md-layout" v-if="product.main_image">
+            <div class="md-layout-item md-size-33 mx-auto">
+              <md-field>
+                <img :src="product.main_image" />
+              </md-field>
+            </div>
+          </div>
+
         </md-card-content>
       </md-card>
     </div>
@@ -83,7 +109,7 @@
 </template>
 
 <script>
-import { db } from '@/config/firebaseInit';
+import { db, storage } from '@/config/firebaseInit';
 import Swal from "sweetalert2";
 
 export default {
@@ -95,9 +121,12 @@ export default {
         slug: "",
         price: 0,
         collection: "",
-        description: ""
+        description: "",
+        main_image: "",
+        gallery: []
       },
-      collections: []
+      collections: [],
+      upload_progress: null
     }
   },
   created() {
@@ -117,6 +146,34 @@ export default {
     }
   },
   methods: {
+    uploadImage(e) {
+      console.log(e);
+      let image = e.target.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(image);
+      let vm = this;
+      reader.onload = e => {
+        let storageRef = storage.ref(`images/${this.product.slug}/${Date.parse(new Date())}_${image.name}`);
+        let uploadTask = storageRef.put(image);
+
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            vm.upload_progress = (vm.upload_transferred / vm.upload_total) * 100;
+          },
+          error => {
+            vm.upload_progress = false;
+            alert('could not upload logo, please try again.')
+          },
+          snapshot => {
+            uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+              vm.product.main_image = downloadURL
+               console.log(downloadURL)
+            });
+          }
+        );
+      };
+    },
     save() {
       let vm = this;
       if (!vm.product.created){
