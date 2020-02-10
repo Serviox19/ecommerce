@@ -82,7 +82,7 @@
                   ref="upload"
                   accept="image/*"
                   @change="uploadImage"
-                  :disabled="product.main_image !== '' || null"
+                  :disabled="hasMainImage"
                   v-model="product.main_image"
                 ></md-file>
               </md-field>
@@ -92,7 +92,10 @@
           <div class="md-layout" v-if="product.main_image">
             <div class="md-layout-item md-size-33 mx-auto">
               <md-field>
-                <img :src="product.main_image" />
+                <div class="main_image--wrapper">
+                  <span class="delete" @click="deleteMainImg">X</span>
+                  <img :src="product.main_image" alt="Main Image" />
+                </div>
               </md-field>
             </div>
           </div>
@@ -122,11 +125,16 @@ export default {
         price: 0,
         collection: "",
         description: "",
-        main_image: "",
+        main_image: null,
         gallery: []
       },
       collections: [],
       upload_progress: null
+    }
+  },
+  computed: {
+    hasMainImage() {
+      return this.product.main_image ? true : false
     }
   },
   created() {
@@ -149,6 +157,7 @@ export default {
     uploadImage(e) {
       console.log(e);
       let image = e.target.files[0];
+      let imageName = image.name;
       let reader = new FileReader();
       reader.readAsDataURL(image);
       let vm = this;
@@ -174,6 +183,36 @@ export default {
         );
       };
     },
+    deleteMainImg() {
+      let vm = this;
+      Swal.fire({
+        title: 'Are you Sure?',
+        text: 'You wont be able to revert back!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        ConfirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          vm.upload_progress = true;
+          let productRef = storage.refFromURL(vm.product.main_image);
+          productRef.delete()
+          .then(() => {
+            vm.product.main_image = ""
+            Swal.fire('Deleted!', 'Your file has been deleted', 'success')
+            //clear form value
+            vm.$refs.upload.value = null
+            vm.upload_progress = null
+          })
+          .catch((error) => {
+            if (error) {
+              console.log(error);
+            }
+          })
+        }
+      })
+    },
     save() {
       let vm = this;
       if (!vm.product.created){
@@ -191,4 +230,27 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+  .main_image--wrapper {
+    position: relative;
+  }
+
+  .delete {
+    position: absolute;
+    top: -0.3em;
+    left: -0.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: red;
+    color: #FFF;
+    font-weight: 500;
+    height: 2em;
+    width: 2em;
+    cursor: pointer
+  }
+
+</style>
