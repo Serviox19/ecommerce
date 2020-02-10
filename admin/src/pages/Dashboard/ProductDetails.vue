@@ -59,6 +59,18 @@
             </div>
           </div>
 
+          <div class="md-layout">
+            <label class="md-layout-item md-size-15 md-form-label">
+              Description
+            </label>
+            <div class="md-layout-item">
+              <md-field>
+                <label>Enter Product Description</label>
+                <md-textarea v-model="product.description"></md-textarea>
+              </md-field>
+            </div>
+          </div>
+
         </md-card-content>
       </md-card>
     </div>
@@ -82,7 +94,8 @@ export default {
         name: "",
         slug: "",
         price: 0,
-        collection: ""
+        collection: "",
+        description: ""
       },
       collections: []
     }

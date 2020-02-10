@@ -1405,6 +1405,10 @@ svg:not(:root) {
   .medium-up--grid--table > .grid__item {
     display: block;
   }
+
+  .grid__item {
+    padding-left: 0
+  }
 }
 
 .grid--uniform > .grid__item {
