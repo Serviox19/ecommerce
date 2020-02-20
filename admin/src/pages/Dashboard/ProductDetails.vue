@@ -234,6 +234,7 @@ export default {
 
   .main_image--wrapper {
     position: relative;
+    width: 100%
   }
 
   .delete {

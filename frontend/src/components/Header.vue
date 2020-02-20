@@ -40,9 +40,14 @@
               d="M17.107 12.5H7.659L4.98 4.117l-.362-1.059c-.138-.401-.292-.559-.695-.559H.924c-.411 0-.748.303-.748.714s.337.714.748.714h2.413l3.002 9.48c.126.38.295.52.942.52h9.825c.411 0 .748-.303.748-.714s-.336-.714-.748-.714zM10.424 16.23a1.498 1.498 0 1 1-2.997 0 1.498 1.498 0 0 1 2.997 0zM16.853 16.23a1.498 1.498 0 1 1-2.997 0 1.498 1.498 0 0 1 2.997 0z">
             </path>
           </svg>
-          <span class="small--hide">
+          <span class="small--hide" @click="goToCart">
             Cart
-            (<span id="CartCount">0</span>)
+            (<span id="CartCount">
+              <transition>
+                <span v-if="cart.length > 0">{{ cart.length }}</span>
+                <span v-else>0</span>
+              </transition>
+            </span>)
           </span>
         </a>
         <span class="vertical-divider small--hide"></span>
@@ -79,17 +84,23 @@ export default {
   name: 'header',
   components: {},
   data() {
-    return {
-
-    }
+    return {}
   },
   created() {
   },
   mounted() {
   },
+  computed: {
+    cart() {
+      return this.$store.state.cart
+    }
+  },
   methods: {
     goToCheckout() {
       console.log('not yet');
+    },
+    goToCart() {
+      this.$router.push('/cart')
     }
   }
 }

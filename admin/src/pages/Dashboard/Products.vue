@@ -48,7 +48,7 @@
         </md-card-content>
       </md-card>
     </div>
-    <div class="md-layout-item md-medium-size-100 md-large-size-100">
+    <div class="md-layout-item md-medium-size-100 md-large-size-100 md-xlarge-size-100">
       <md-card>
         <md-card-header class="md-card-header-icon md-card-header-green">
           <div class="card-icon">
