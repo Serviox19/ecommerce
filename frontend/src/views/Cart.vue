@@ -59,10 +59,10 @@
                   </svg>
                   <span class="icon__fallback-text">Update Cart</span>
                 </button>
-                <a class="btn btn--secondary" href="">Continue shopping</a>
+                <a class="btn btn--secondary" @click="goToHome">Continue shopping</a>
               </p>
               <p>
-                <button type="submit" name="checkout" class="btn">Check Out</button>
+                <button type="submit" name="checkout" class="btn" @click="goToCheckout">Check Out</button>
               </p>
             </div>
           </div>
@@ -91,7 +91,14 @@ export default {
   mounted() {
     console.log(this.$store.state.cart);
   },
-  methods: {}
+  methods: {
+    goToCheckout() {
+      this.$router.push({ path: '/checkout' })
+    },
+    goToHome() {
+      this.$router.push({ path: '/' })
+    }
+  }
 }
 </script>
 

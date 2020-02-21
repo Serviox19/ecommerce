@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue';
 import Collection from '../views/Collection.vue';
 import ProductDetail from '../views/ProductDetail.vue';
-import Cart from '../views/Cart.vue'
+import Cart from '../views/Cart.vue';
+import Checkout from '../views/Checkout.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,12 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout,
+    meta: { layout: 'checkout' }
   }
 ]
 
