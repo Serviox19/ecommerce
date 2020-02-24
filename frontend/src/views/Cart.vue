@@ -32,7 +32,7 @@
           </thead>
           <tbody>
             <!-- Loop for each product -->
-            <CartItemRow />
+            <CartItemRow v-for="item in cart" :key="item.slug" :info="item" />
           </tbody>
         </table>
 
@@ -44,7 +44,7 @@
             </div>
             <div class="grid__item text-center medium-up--one-half medium-up--text-right">
               <p>
-                <span class="cart__subtotal-title h3">Subtotal</span>
+                <span class="cart__subtotal-title h3">Subtotal </span>
                 <span class="cart__subtotal h3">$399.95</span>
               </p>
 

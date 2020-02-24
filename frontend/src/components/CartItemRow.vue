@@ -3,21 +3,21 @@
     <td class="cart__table-cell--image small--text-center">
       <div id="CartImageWrapper--" class="cart__image-wrapper supports-js">
         <a class="cart__image-container" href="" style="padding-top:100.0%;">
-          <img id="CartImage--" class="cart__image lazyautosizes lazyloaded" src="//cdn.shopify.com/s/files/1/0037/5472/products/SGT-590A_01_grande_372def63-6e61-4087-a210-36c0cc682683_100x100.jpg?v=1569049261" data-widths="[180, 230, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" data-aspectratio="1.0" data-sizes="auto" alt="alt here" itemprop="image" />
+          <img id="CartImage--" class="cart__image lazyautosizes lazyloaded" :src="info.main_image" data-widths="[180, 230, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" data-aspectratio="1.0" data-sizes="auto" alt="alt here" itemprop="image" />
         </a>
       </div>
     </td>
     <td class="cart__table-cell--meta small--text-center">
       <p>
-        <a href="">Roland Flat Peak Cap - Black/Black</a>
-        <br><small>Black/Black / OSFA</small>
+        <a href="">{{ info.name }}</a>
+        <br><small>**Extra info (color, size)**</small>
       </p>
       <p class="txt--minor">
-        <a href="" class="cart__remove">Remove</a>
+        <a href="" class="cart__remove" @click="removeItem(item)">Remove</a>
       </p>
     </td>
     <td class="cart__table-cell--price medium-up--text-center" data-label="Price">
-      <span>$399.95</span>
+      <span>${{ info.price }}</span>
     </td>
     <td data-label="Quantity" class="medium-up--text-center cart__table-cell--quantity">
       <label class="visually-hidden" for="">Quantity</label>
@@ -33,13 +33,19 @@
 export default {
   name: 'cart-item',
   components: {},
-  props: [],
+  props: ['info'],
   data() {
     return {}
   },
   created() {
   },
   mounted() {
+    console.log(this.info);
+  },
+  methods: {
+    removeItem() {
+      this.$store.commit('deleteProduct')
+    }
   }
 }
 </script>
