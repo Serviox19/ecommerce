@@ -9,39 +9,15 @@
 
         <div id="ProductImageWrapper-391868907535" class="product-single__featured-image-wrapper supports-js" data-image-id="391868907535">
           <div class="product-single__photos" data-image-id="391868907535" style="padding-top:100.0%;">
-            <img id="ProductImage-391868907535" class="product-single__photo lightbox lazyautosizes lazyloaded" src="//cdn.shopify.com/s/files/1/0037/5472/products/SGT-1161A_01_200x200.jpg?v=1509388451" data-aspectratio="1.0" data-sizes="auto" alt="Product Main Img Alt">
+            <img id="ProductImage-391868907535" class="product-single__photo lightbox lazyautosizes lazyloaded" :src="product.main_image" data-aspectratio="1.0" data-sizes="auto" alt="Product Main Img Alt">
           </div>
         </div>
 
-        <ul class="product-single__thumbnails grid grid--uniform" id="ProductThumbs">
+        <ul class="product-single__thumbnails grid grid--uniform" id="ProductThumbs" v-if="product.gallery">
 
-          <li class="grid__item small--one-third medium-up--one-third">
+          <li class="grid__item small--one-third medium-up--one-third" v-for="(image, index) in product.gallery" :key="index">
             <a href="" class="product-single__thumbnail">
-              <img src="" alt="Product Thumbnail Alt">
-            </a>
-          </li>
-
-          <li class="grid__item small--one-third medium-up--one-third">
-            <a href="" class="product-single__thumbnail">
-              <img src="" alt="Product Thumbnail Alt">
-            </a>
-          </li>
-
-          <li class="grid__item small--one-third medium-up--one-third">
-            <a href="" class="product-single__thumbnail">
-              <img src="" alt="Product Thumbnail Alt">
-            </a>
-          </li>
-
-          <li class="grid__item small--one-third medium-up--one-third">
-            <a href="" class="product-single__thumbnail">
-              <img src="" alt="Product Thumbnail Alt">
-            </a>
-          </li>
-
-          <li class="grid__item small--one-third medium-up--one-third">
-            <a href="" class="product-single__thumbnail">
-              <img src="" alt="Product Thumbnail Alt">
+              <img src="https://via.placeholder.com/137x137" alt="Product Thumbnail Alt">
             </a>
           </li>
 

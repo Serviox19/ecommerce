@@ -83,7 +83,8 @@ export default {
         name: "",
         slug: "",
         price: 0,
-        collection: ""
+        collection: "",
+        gallery: []
       },
       collections: []
     }

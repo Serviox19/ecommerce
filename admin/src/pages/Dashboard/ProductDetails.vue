@@ -83,7 +83,6 @@
                   accept="image/*"
                   @change="uploadImage"
                   :disabled="hasMainImage"
-                  v-model="product.main_image"
                 ></md-file>
               </md-field>
             </div>
@@ -94,6 +93,35 @@
               <md-field>
                 <div class="main_image--wrapper">
                   <span class="delete" @click="deleteMainImg">X</span>
+                  <img :src="product.main_image" alt="Main Image" />
+                </div>
+              </md-field>
+            </div>
+          </div>
+
+          <div class="md-layout">
+            <label class="md-layout-item md-size-15 md-form-label">
+              Gallery Images
+            </label>
+            <div class="md-layout-item">
+              <md-field>
+                <input
+                  type="file"
+                  ref="gallery_images"
+                  multiple
+                  accept="image/*"
+                  @change="uploadGallery"
+                  :disabled="upload_progress !== null"
+                />
+              </md-field>
+            </div>
+          </div>
+
+          <div class="md-layout" v-show="product.gallery.length">
+            <div class="md-layout-item md-size-25" v-for="(image, index) in product.gallery" :key="index">
+              <md-field>
+                <div class="main_image--wrapper">
+                  <span class="delete" @click="deleteGalleryImg(index)">X</span>
                   <img :src="product.main_image" alt="Main Image" />
                 </div>
               </md-field>
@@ -161,27 +189,55 @@ export default {
       let reader = new FileReader();
       reader.readAsDataURL(image);
       let vm = this;
+      vm.upload_progress = true;
       reader.onload = e => {
         let storageRef = storage.ref(`images/${this.product.slug}/${Date.parse(new Date())}_${image.name}`);
         let uploadTask = storageRef.put(image);
 
-        uploadTask.on(
-          "state_changed",
-          snapshot => {
-            vm.upload_progress = (vm.upload_transferred / vm.upload_total) * 100;
-          },
-          error => {
-            vm.upload_progress = false;
-            alert('could not upload logo, please try again.')
-          },
-          snapshot => {
-            uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-              vm.product.main_image = downloadURL
-               console.log(downloadURL)
-            });
-          }
-        );
+        uploadTask.on("state_changed", snapshot => {
+        }, function(error) {
+          vm.upload_progress = null;
+          alert('could not upload logo, please try again.')
+        }, function() {
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            vm.product.main_image = downloadURL
+            console.log(downloadURL)
+          });
+        });
       };
+      vm.upload_progress = null;
+    },
+    uploadGallery(e) {
+      let input = e.target;
+      let vm = this;
+      vm.upload_progress = true;
+      if (input.files.length) {
+        let filePromises = [...input.files].map(file => {
+          let metaData = {
+            contentType: file.type
+          };
+
+          let uploadTask = storage
+            .ref()
+            .child(`images/${this.product.slug}/gallery/${file.name}`)
+            .put(file, metaData)
+
+          uploadTask.on("state_changed",
+            function(snapshot) {},
+            function(error) {},
+            function() {
+              uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                console.log(url);
+                let image = {};
+                image.url = url;
+                image.alt = "";
+                vm.product.gallery.push(image)
+              });
+            }
+          );
+        });
+        vm.upload_progress = null;
+      }
     },
     deleteMainImg() {
       let vm = this;
@@ -212,6 +268,9 @@ export default {
           })
         }
       })
+    },
+    deleteGalleryImg() {
+
     },
     save() {
       let vm = this;
